@@ -76,6 +76,7 @@ int main()
             string recipeName;
             cout << "레시피 이름을 검색합니다. : " << endl;
             cin >> recipeName;
+
             PotionRecipe p = myWorkshop.searchRecipeByName(recipeName);
             cout << p.potionName << endl;
             for (auto inIt : p.ingredients)

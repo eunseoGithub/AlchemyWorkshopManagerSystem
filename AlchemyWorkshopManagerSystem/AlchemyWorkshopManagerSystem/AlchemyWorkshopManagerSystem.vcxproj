@@ -125,12 +125,14 @@
   <ItemGroup>
     <ClInclude Include="AlchemyWorkshop.h" />
     <ClInclude Include="PotionRecipe.h" />
+    <ClInclude Include="RecipeManager.h" />
     <ClInclude Include="StockManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AlchemyWorkshop.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PotionRecipe.cpp" />
+    <ClCompile Include="RecipeManager.cpp" />
     <ClCompile Include="StockManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
