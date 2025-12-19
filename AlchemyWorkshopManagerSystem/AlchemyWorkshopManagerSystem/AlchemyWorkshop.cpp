@@ -2,11 +2,26 @@
 
 void AlchemyWorkshop::addRecipe(const std::string& name, const std::vector<std::string>& ingredients) 
 {
+    if (!recipes.empty())
+    {
+        auto it = find_if(recipes.begin(), recipes.end(), [name](const PotionRecipe& recipe)
+            {
+                return recipe.potionName == name;
+            });
+        if (it != recipes.end())
+        {
+            cout << "이미 레시피가 존재합니다" << endl;
+            return;
+        }
+    }
+    
     recipes.push_back(PotionRecipe(name, ingredients));
+    stockManager.InitializeStock(name);
     std::cout << ">> 새로운 레시피 '" << name << "'이(가) 추가되었습니다." << std::endl;
+
 }
 
-void AlchemyWorkshop::displayAllRecipes() const
+void AlchemyWorkshop::displayAllRecipes()
 {
     if (recipes.empty()) 
     {
@@ -19,7 +34,6 @@ void AlchemyWorkshop::displayAllRecipes() const
     {
         std::cout << "- 물약 이름: " << recipes[i].potionName << std::endl;
         std::cout << "  > 필요 재료: ";
-
         // 재료 목록을 순회하며 출력
         for (size_t j = 0; j < recipes[i].ingredients.size(); ++j) 
         {
@@ -31,6 +45,7 @@ void AlchemyWorkshop::displayAllRecipes() const
             }
         }
         std::cout << std::endl;
+        std::cout << "개수 : " << stockManager.GetStock(recipes[i].potionName) << std::endl;
     }
     std::cout << "---------------------------\n";
 }
@@ -65,4 +80,9 @@ vector<PotionRecipe> AlchemyWorkshop::searchRecipeByIngredient(string ingredient
     if (ingredientRecipe.size() == 0)
         cout << "재료가 포함된 레시피가 존재하지 않습니다" << endl;
     return ingredientRecipe;
+}
+
+StockManager AlchemyWorkshop::GetStockManager()
+{
+    return stockManager;
 }

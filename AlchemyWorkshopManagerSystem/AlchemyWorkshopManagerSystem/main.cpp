@@ -11,10 +11,16 @@ int main()
         std::cout << "⚗️ 연금술 공방 관리 시스템" << std::endl;
         std::cout << "1. 레시피 추가" << std::endl;
         std::cout << "2. 모든 레시피 출력" << std::endl;
-        std::cout << "3. 종료" << std::endl;
+        std::cout << "3. 포션 이름으로 레시피 검색 " << std::endl;
+        std::cout << "4. 재료로 레시피 검색 " << std::endl;
+        std::cout << "5. 포션 지급받기" << std::endl;
+        std::cout << "6. 포션 반환하기 " << std::endl;
         std::cout << "선택: ";
 
         int choice;
+        
+        int* p = new int(10);
+
         std::cin >> choice;
 
         if (std::cin.fail()) 
@@ -86,14 +92,30 @@ int main()
             inPotionRecipe = myWorkshop.searchRecipeByIngredient(ingredientName);
             for (auto it : inPotionRecipe)
             {
+                cout << "-----------------" << endl;
                 cout << it.potionName << endl;
                 for (auto inIt : it.ingredients)
                 {
-                    cout << inIt << endl;
+                    cout << inIt << ", ";
                 }
+                cout << endl;
             }
         }
-        else if (choice == 5) 
+        else if (choice == 5)
+        {
+            string recipeName;
+            cout << "레시피 이름을 검색합니다. : " << endl;
+            cin >> recipeName;
+            myWorkshop.GetStockManager().DispensePotion(recipeName);
+        }
+        else if (choice == 6)
+        {
+            string recipeName;
+            cout << "레시피 이름을 검색합니다. : " << endl;
+            cin >> recipeName;
+            myWorkshop.GetStockManager().ReturnPotion(recipeName);
+        }
+        else if (choice == 7) 
         {
             std::cout << "공방 문을 닫습니다..." << std::endl;
             break;
